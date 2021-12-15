@@ -2,17 +2,25 @@ package com.prussian_trooper.project.newboardtable
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.prussian_trooper.project.newboardtable.databinding.ActivityMainBinding
+import com.prussian_trooper.project.newboardtable.dialogHelper.DialogConst
+import com.prussian_trooper.project.newboardtable.dialogHelper.DialogHelper
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var tvAccount: TextView
     private lateinit var rootElement: ActivityMainBinding
     private val dialogHelper = DialogHelper(this)
+    val mAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +31,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        uiUpdate(mAuth.currentUser)
+    }
+
     private fun init(){
         val toggle = ActionBarDrawerToggle(this, rootElement.drawerLayout, rootElement.mainContent.toolbar, R.string.open, R.string.close)
         rootElement.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         rootElement.navView.setNavigationItemSelectedListener(this)
+        tvAccount = rootElement.navView.getHeaderView(0).findViewById(R.id.tvAccountEmail)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -61,20 +75,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.id_sign_out -> {
-                //  uiUpdate(null)//Если user становится null...
-                // myAuth.signOut()
+                  uiUpdate(null)//Если user становится null...
+                  mAuth.signOut()
             }
         }
-        //  rootElement.drawerLayout.closeDrawer(GravityCompat.START)
+        rootElement.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
 
-      /*fun uiUpdate(user: FirebaseUser?) {//..., то запускается вот эта функция
+      fun uiUpdate(user: FirebaseUser?) {//..., то запускается вот эта функция
       tvAccount.text = if (user == null) {
           resources.getString(R.string.not_reg)
       } else {
           user.email
       }
-  }*/
+  }
 }

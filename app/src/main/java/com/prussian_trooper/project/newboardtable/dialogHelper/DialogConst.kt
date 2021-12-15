@@ -1,4 +1,4 @@
-package com.prussian_trooper.project.newboardtable
+package com.prussian_trooper.project.newboardtable.dialogHelper
 
 //создаём константу для удобства работы с sing_dialog
 object DialogConst {
