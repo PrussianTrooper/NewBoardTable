@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "731656421516",
+    "project_id": "newboardtable",
+    "storage_bucket": "newboardtable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731656421516:android:d630043ae146ed3493bba9",
+        "android_client_info": {
+          "package_name": "com.prussian_trooper.project.newboardtable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731656421516-kd6a6eq8tjilsg8qlfblcl6inbssv2bd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prussian_trooper.project.newboardtable",
+            "certificate_hash": "102d6d4b011bc7b9326bfe94bf6360430ecedcdf"
+          }
+        },
+        {
+          "client_id": "731656421516-hqj52b4jcc5k9v99hf2al7qffedghvgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVRCoaqsj9CtprKocvo-wQ0YYabRkjBYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731656421516-hqj52b4jcc5k9v99hf2al7qffedghvgh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
