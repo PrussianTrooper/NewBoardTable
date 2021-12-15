@@ -17,7 +17,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edSignPassword" />
 
     <Button
-        android:id="@+id/btForgetPass"
+        android:id="@+id/btnForgetP"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/forget_password"
@@ -40,8 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSignTitle"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:autofillHints="" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/edSignPassword"
@@ -54,8 +53,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/edSignEmail"
         app:layout_constraintStart_toStartOf="@+id/edSignEmail"
-        app:layout_constraintTop_toBottomOf="@+id/edSignEmail"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/edSignEmail" />
 
     <TextView
         android:id="@+id/tvSignTitle"
@@ -65,7 +63,7 @@
         android:shadowColor="@color/black"
         android:text="@string/ac_sign_up"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
