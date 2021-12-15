@@ -18,7 +18,7 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/draver_main_menu"
+        app:menu="@menu/drawer_main_menu"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:layout_width="wrap_content"
