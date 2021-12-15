@@ -12,6 +12,7 @@ import com.prussian_trooper.project.newboardtable.databinding.ActivityMainBindin
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var rootElement: ActivityMainBinding
+    private val dialogHelper = DialogHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,19 +53,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             /*Вход для регистрации*/
             R.id.id_sign_up -> {
+                 dialogHelper.createSignDialog(DialogConst.SIGN_UP_STATE)
             }
             /*Вход для входа :) */
             R.id.id_sing_in -> {
+                 dialogHelper.createSignDialog(DialogConst.SIGN_IN_STATE)
             }
 
             R.id.id_sign_out -> {
-
+                //  uiUpdate(null)//Если user становится null...
+                // myAuth.signOut()
             }
         }
+        //  rootElement.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
 
-
-
+      /*fun uiUpdate(user: FirebaseUser?) {//..., то запускается вот эта функция
+      tvAccount.text = if (user == null) {
+          resources.getString(R.string.not_reg)
+      } else {
+          user.email
+      }
+  }*/
 }
