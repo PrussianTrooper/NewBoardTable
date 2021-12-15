@@ -2,6 +2,7 @@ package com.prussian_trooper.project.newboardtable.dialogHelper
 
 import android.app.AlertDialog
 import android.view.View
+import android.widget.Toast
 import com.prussian_trooper.project.newboardtable.MainActivity
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.accountHelper.AccountHelper
@@ -23,10 +24,27 @@ class DialogHelper(act: MainActivity) {
          rootDialogElement.btSignUpIn.setOnClickListener{
              setOnClickSignUpIn(index, rootDialogElement, dialog)
          }
+        rootDialogElement.btnForgetP.setOnClickListener{
+            setOnClickResetPassword(rootDialogElement, dialog)
+        }
 
          dialog.show()
 
      }
+
+    private fun setOnClickResetPassword(rootDialogElement: SignDialogBinding, dialog: AlertDialog?) {
+        if (rootDialogElement.edSignEmail.text.isNotEmpty()){
+            act.mAuth.sendPasswordResetEmail(rootDialogElement.edSignEmail.text.toString()).addOnCompleteListener{task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(act, R.string.email_reset_password_was_send, Toast.LENGTH_LONG).show()
+                }
+
+            }
+            dialog?.dismiss()
+        } else {
+            rootDialogElement.tvDialogMessage.visibility = View.VISIBLE
+        }
+    }
 
     private fun setOnClickSignUpIn(index: Int, rootDialogElement: SignDialogBinding, dialog: AlertDialog?) {
         dialog?.dismiss()
