@@ -10,7 +10,7 @@ import com.prussian_trooper.project.newboardtable.databinding.SignDialogBinding
 
 class DialogHelper(act: MainActivity) {
     private val act = act
-    private val accHelper = AccountHelper(act)//объект, с помощью которго мы можем регистрироваться
+    val accHelper = AccountHelper(act)//объект, с помощью которго мы можем регистрироваться
 
     fun createSignDialog(index:Int){
          val builder = AlertDialog.Builder(act)
@@ -27,9 +27,11 @@ class DialogHelper(act: MainActivity) {
         rootDialogElement.btnForgetP.setOnClickListener{
             setOnClickResetPassword(rootDialogElement, dialog)
         }
+        rootDialogElement.btGoogleSignIn.setOnClickListener{
+            accHelper.signInWithGoogle()
+        }
 
          dialog.show()
-
      }
 
     private fun setOnClickResetPassword(rootDialogElement: SignDialogBinding, dialog: AlertDialog?) {
