@@ -14,7 +14,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="not_reg">Войдите или зарегистрируйтесь</string>
-
     <!-- Sign Dialog -->
     <string name="dialog_reset_email_message">Для восстановления пароля укажите ваш Email адресс</string>
     <string name="email_reset_password_was_send">Пароль был успешно отправлен </string>
@@ -27,5 +26,10 @@
     <string name="sign_in_error">Ошибка входа</string>
     <string name="send_verification_email_error">Не удалось отправить email для подтверждения</string>
     <string name="send_verification_email_done">На вашу почту была отправленна ссылка для подтверждения аккаунта</string>
+
+    <!-- Sign Dialog -->
+    <string name="link_done">Соединение Email и Google успешно</string>
+    <string name="enter_to_G">У вас уже имеется аккаунт с этим Email. Войдите по нему.</string>
+
 
 </resources>

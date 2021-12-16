@@ -30,7 +30,9 @@ class AccountHelper(act:MainActivity) {
                         if (task.exception is FirebaseAuthUserCollisionException) {
                             val exception = task.exception as FirebaseAuthUserCollisionException
                             if (exception.errorCode == FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE) {
-                                Toast.makeText(act, FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE, Toast.LENGTH_LONG).show()
+                                //Toast.makeText(act, FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE, Toast.LENGTH_LONG).show()
+                                //Link email
+                                linkEmailTog(email, password)
                             }
                         } else if (task.exception is FirebaseAuthInvalidCredentialsException) {
 
@@ -82,6 +84,19 @@ class AccountHelper(act:MainActivity) {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(act.getString(R.string.default_web_client_id)).requestEmail().build()
         return GoogleSignIn.getClient(act,gso)
+    }
+
+    private fun linkEmailTog (email: String, password: String) {
+        val credential = EmailAuthProvider.getCredential(email, password)
+        if (act.mAuth.currentUser != null) {
+            act.mAuth.currentUser?.linkWithCredential(credential)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(act, act.resources.getString(R.string.link_done), Toast.LENGTH_LONG).show()
+                }
+            }
+        }else {
+            Toast.makeText(act, act.resources.getString(R.string.enter_to_G), Toast.LENGTH_LONG).show()
+        }
     }
 
     fun signInWithGoogle() {
