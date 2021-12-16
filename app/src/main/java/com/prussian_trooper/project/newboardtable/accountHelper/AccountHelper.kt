@@ -64,26 +64,27 @@ class AccountHelper(act:MainActivity) {
                 if (task.isSuccessful) {
                     act.uiUpdate(task.result?.user)
                 } else {
-
+                    Log.d("MyLog", "Google Sign In Exception : ${task.exception}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        Log.d("MyLog", "Google Sign In Exception : ${task.exception}")
+                        //Log.d("MyLog", "Google Sign In Exception : ${task.exception}")
                         val exception = task.exception as FirebaseAuthInvalidCredentialsException
+                        //Log.d("MyLog", "Exception 2 : ${exception.errorCode}")
 
                         if (exception.errorCode == FirebaseAuthConstants.ERROR_INVALID_EMAIL) {
                             Toast.makeText(act, FirebaseAuthConstants.ERROR_INVALID_EMAIL, Toast.LENGTH_LONG).show()
                         } else if (exception.errorCode == FirebaseAuthConstants.ERROR_WRONG_PASSWORD) {
                             Toast.makeText(act, FirebaseAuthConstants.ERROR_WRONG_PASSWORD, Toast.LENGTH_LONG).show()
                         }
+                    } else if (task.exception is FirebaseAuthInvalidUserException) {
+                        val exception = task.exception as FirebaseAuthInvalidUserException
+                        if (exception.errorCode == FirebaseAuthConstants.ERROR_USER_NOT_FOUND) {
+                            Toast.makeText(act, FirebaseAuthConstants.ERROR_USER_NOT_FOUND, Toast.LENGTH_LONG).show()
+                        }
+                        //Log.d("MyLog", "Google Sign In Exception : ${exception.errorCode}")
                     }
                 }
             }
         }
-    }
-
-    private fun getSignInClient():GoogleSignInClient {//Призапуске функции, возвращается клиент
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(act.getString(R.string.default_web_client_id)).requestEmail().build()
-        return GoogleSignIn.getClient(act,gso)
     }
 
     private fun linkEmailTog (email: String, password: String) {
@@ -99,10 +100,20 @@ class AccountHelper(act:MainActivity) {
         }
     }
 
+    private fun getSignInClient():GoogleSignInClient {//Призапуске функции, возвращается клиент
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(act.getString(R.string.default_web_client_id)).requestEmail().build()
+        return GoogleSignIn.getClient(act,gso)
+    }
+
     fun signInWithGoogle() {
         signInClient = getSignInClient()
         val intent = signInClient.signInIntent
         act.startActivityForResult(intent, GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE)
+    }
+
+    fun signOutG() {
+        getSignInClient().signOut()
     }
 
     fun signInFirebaseWithGoogle(token: String){

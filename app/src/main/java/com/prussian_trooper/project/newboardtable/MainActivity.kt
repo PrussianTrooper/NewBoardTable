@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.prussian_trooper.project.newboardtable.act.EditAdsAct
 import com.prussian_trooper.project.newboardtable.databinding.ActivityMainBinding
 import com.prussian_trooper.project.newboardtable.dialogHelper.DialogConst
 import com.prussian_trooper.project.newboardtable.dialogHelper.DialogHelper
@@ -33,6 +35,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val view = rootElement.root
         setContentView(view)
         init()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {//While button is active, new activity start working
+        if (item.itemId == R.id.id_new_ads) {
+            val i = Intent(this, EditAdsAct::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onStart() {
@@ -59,7 +74,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun init(){
+    private fun init() {
+        setSupportActionBar(rootElement.mainContent.toolbar)
         val toggle = ActionBarDrawerToggle(this, rootElement.drawerLayout, rootElement.mainContent.toolbar, R.string.open, R.string.close)
         rootElement.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -87,15 +103,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             /*Вход для регистрации*/
             R.id.id_sign_up -> {
-                 dialogHelper.createSignDialog(DialogConst.SIGN_UP_STATE)
+                dialogHelper.createSignDialog(DialogConst.SIGN_UP_STATE)
             }
             /*Вход для входа :) */
             R.id.id_sing_in -> {
-                 dialogHelper.createSignDialog(DialogConst.SIGN_IN_STATE)
+                dialogHelper.createSignDialog(DialogConst.SIGN_IN_STATE)
             }
             R.id.id_sign_out -> {
-                  uiUpdate(null)//Если user становится null...
-                  mAuth.signOut()
+                uiUpdate(null)//Если user становится null...
+                mAuth.signOut()
+                dialogHelper.accHelper.signOutG()
             }
         }
         rootElement.drawerLayout.closeDrawer(GravityCompat.START)

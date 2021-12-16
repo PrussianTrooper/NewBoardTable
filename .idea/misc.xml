@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/activity_edit_ads.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/main_content.xml" value="0.1272644927536232" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/nav_header_main.xml" value="0.10643115942028986" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/nav_header_menu.xml" value="0.1272644927536232" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/sign_dialog.xml" value="0.2" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/draver_main_menu.xml" value="0.33" />
+        <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/drawer_main_menu.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/main_menu.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/menu.xml" value="0.20208333333333334" />
       </map>
     </option>

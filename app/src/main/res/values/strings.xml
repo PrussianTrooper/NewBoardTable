@@ -29,7 +29,7 @@
 
     <!-- Sign Dialog -->
     <string name="link_done">Соединение Email и Google успешно</string>
-    <string name="enter_to_G">У вас уже имеется аккаунт с этим Email. Войдите по нему.</string>
+    <string name="enter_to_G">У вас уже имеется аккаунт с этим Email</string>
+    <!-- <string name="default_web_client_id">...</string>-->
 
-
-</resources>
+ </resources>
