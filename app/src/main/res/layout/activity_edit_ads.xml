@@ -27,7 +27,7 @@
                 android:layout_margin="5dp">
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vpImage"
+                    android:id="@+id/vpImages"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@android:drawable/editbox_background_normal"
@@ -48,10 +48,10 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
                     android:onClick="onClickGetImages"
-                    app:layout_constraintBottom_toBottomOf="@+id/vpImage"
+                    app:layout_constraintBottom_toBottomOf="@+id/vpImages"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/vpImage"
-                    app:layout_constraintTop_toTopOf="@+id/vpImage"
+                    app:layout_constraintStart_toStartOf="@+id/vpImages"
+                    app:layout_constraintTop_toTopOf="@+id/vpImages"
                     app:srcCompat="@android:drawable/ic_menu_edit"
                     tools:ignore="SpeakableTextPresentCheck" />
 

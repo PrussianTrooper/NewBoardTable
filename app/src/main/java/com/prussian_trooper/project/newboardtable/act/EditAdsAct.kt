@@ -12,17 +12,20 @@ import com.fxn.pix.Options
 import com.fxn.pix.Pix
 import com.fxn.utility.PermUtil
 import com.prussian_trooper.project.newboardtable.R
+import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
 import com.prussian_trooper.project.newboardtable.databinding.ActivityEditAdsBinding
 import com.prussian_trooper.project.newboardtable.dialogs.DialogSpinnerHelper
 import com.prussian_trooper.project.newboardtable.frag.FragmentCloseInterface
 import com.prussian_trooper.project.newboardtable.frag.ImageListFrag
+import com.prussian_trooper.project.newboardtable.frag.SelectImageItem
 import com.prussian_trooper.project.newboardtable.utils.CityHelper
 import com.prussian_trooper.project.newboardtable.utils.ImagePicker
 
 class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
     lateinit var rootElement:ActivityEditAdsBinding
     private val dialog = DialogSpinnerHelper()
-    private var isImagesPermissionGranted = false
+    //private var isImagesPermissionGranted = false
+    private lateinit var imageAdapter : ImageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,9 +69,9 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
         }
     }
 
-    private fun init(){
-
-
+    private fun init() {
+        imageAdapter = ImageAdapter()
+        rootElement.vpImages.adapter = imageAdapter
     }
 
     //OnClicks
@@ -94,8 +97,8 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
         ImagePicker.getImages(this,3)
     }
 
-    override fun onFragClose() {
+    override fun onFragClose(list : ArrayList<SelectImageItem>) {
         rootElement.scrolViewMain.visibility = View.VISIBLE
-
+        imageAdapter.update(list)
     }
 }
