@@ -1,6 +1,7 @@
 package com.prussian_trooper.project.newboardtable.frag
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +15,19 @@ import com.prussian_trooper.project.newboardtable.databinding.ListImageFragBindi
 import com.prussian_trooper.project.newboardtable.utils.ImageManager
 import com.prussian_trooper.project.newboardtable.utils.ImagePicker
 import com.prussian_trooper.project.newboardtable.utils.ItemTouchMoveCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, private val newList : ArrayList<String>) : Fragment() {
+
     lateinit var rootElement : ListImageFragBinding
     val adapter = SelectImageRvAdapter()
     val dragCallback = ItemTouchMoveCallback(adapter)
     val touchHelper = ItemTouchHelper(dragCallback)
+    private lateinit var job: Job
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootElement = ListImageFragBinding.inflate(inflater)
         return rootElement.root
@@ -31,15 +39,19 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
         touchHelper.attachToRecyclerView(rootElement.rcViewSelectImage)
         rootElement.rcViewSelectImage.layoutManager = LinearLayoutManager(activity)
         rootElement.rcViewSelectImage.adapter = adapter
-        ImageManager.imageResize(newList)
+        job = CoroutineScope(Dispatchers.Main).launch {
+           val text = ImageManager.imageResize(newList)
+            Log.d("MyLog","Result : $text")
+        }
+
+
         //adapter.updateAdapter(newList, true)
-
-
     }
 
     override fun onDetach() {
         super.onDetach()
         fragCloseInterface.onFragClose(adapter.mainArray)
+        job.cancel()
     }
 
    private fun setUpToolbar() {

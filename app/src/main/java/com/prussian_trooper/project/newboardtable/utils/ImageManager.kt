@@ -3,6 +3,9 @@ package com.prussian_trooper.project.newboardtable.utils
 import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.exifinterface.media.ExifInterface
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 
 import java.io.File
 
@@ -44,12 +47,13 @@ object ImageManager {
     }
 
     // сжатие картинки с сохранением пропорции
-    fun imageResize(uris: List<String>) {
+    //suspend - функция не перйдёт дальше пока не завершит свою работу
+    //withContext(Dispatchers.IO) - функция будет работать в фоновом режиме
+   suspend fun imageResize(uris: List<String>): String = withContext(Dispatchers.IO){
         val tempList = ArrayList<List<Int>>()
         for (n in uris.indices) {
 
             val size = getImageSize(uris[n])
-
             val imageRatio = size[WIDTH].toFloat() / size[HEIGHT].toFloat()
 
             if (imageRatio > 1) {
@@ -76,10 +80,10 @@ object ImageManager {
                     }
 
                 }
-                //Log.d("MyLog", "Ration : $imageRatio")
 
             }
-
+        //Симуляция трудоёмкой операции. Затоморженное действие.
+        Thread.sleep(10000)
+        return@withContext "Done"
         }
-
 }
