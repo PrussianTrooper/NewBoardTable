@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prussian_trooper.project.newboardtable.R
+import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
 import com.prussian_trooper.project.newboardtable.databinding.ListImageFragBinding
+import com.prussian_trooper.project.newboardtable.utils.ImageManager
 import com.prussian_trooper.project.newboardtable.utils.ImagePicker
 import com.prussian_trooper.project.newboardtable.utils.ItemTouchMoveCallback
 
@@ -29,7 +31,8 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
         touchHelper.attachToRecyclerView(rootElement.rcViewSelectImage)
         rootElement.rcViewSelectImage.layoutManager = LinearLayoutManager(activity)
         rootElement.rcViewSelectImage.adapter = adapter
-        adapter.updateAdapter(newList, true)
+        ImageManager.imageResize(newList)
+        //adapter.updateAdapter(newList, true)
 
 
     }
