@@ -1,16 +1,13 @@
 package com.prussian_trooper.project.newboardtable.frag
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.databinding.ListImageFragBinding
 import com.prussian_trooper.project.newboardtable.utils.ImagePicker
@@ -59,12 +56,17 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
 
        addImageItem.setOnMenuItemClickListener {
            val imageCont = ImagePicker.MAX_IMAGE_COUNT - adapter.mainArray.size
-           ImagePicker.getImages(activity as AppCompatActivity, imageCont)
+           ImagePicker.getImages(activity as AppCompatActivity, imageCont, ImagePicker.REQUEST_CODE_GET_IMAGES)
            true
        }
    }
 
     fun updateAdapter(newList: ArrayList<String>) {
         adapter.updateAdapter(newList, false)
+    }
+
+    fun setSingleImage(uri : String, pos : Int){
+        adapter.mainArray[pos] = uri
+        adapter.notifyDataSetChanged()
     }
 }

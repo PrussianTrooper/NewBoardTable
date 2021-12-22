@@ -2,7 +2,6 @@ package com.prussian_trooper.project.newboardtable.dialogs
 
 import android.app.AlertDialog
 import android.content.Context
-import android.text.Selection
 import android.view.LayoutInflater
 import android.widget.SearchView
 import android.widget.TextView

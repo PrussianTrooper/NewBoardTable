@@ -2,7 +2,6 @@ package com.prussian_trooper.project.newboardtable.utils
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import java.text.ParsePosition
 
 class ItemTouchMoveCallback(val adapter : ItemTouchAdapter) : ItemTouchHelper.Callback() {
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {

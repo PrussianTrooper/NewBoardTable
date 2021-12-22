@@ -1,14 +1,12 @@
 package com.prussian_trooper.project.newboardtable.dialogs
 
 import android.app.AlertDialog
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.prussian_trooper.project.newboardtable.R
-import com.prussian_trooper.project.newboardtable.act.EditAdsAct
 
 class RcViewDialogSpinnerAdapter(var tvSelection: TextView, var dialog:AlertDialog) : RecyclerView.Adapter<RcViewDialogSpinnerAdapter.SpViewHolder>() {
     val mainList = ArrayList<String>()
