@@ -1,6 +1,7 @@
 package com.prussian_trooper.project.newboardtable.frag
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ import java.util.ArrayList
 
 class SelectImageRvAdapter: RecyclerView.Adapter<SelectImageRvAdapter.ImageHolder>(), ItemTouchMoveCallback.ItemTouchAdapter {
 
-    val mainArray = ArrayList<String>()
+    val mainArray = ArrayList<Bitmap>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.select_image_frag_item, parent, false)
         return ImageHolder(view, parent.context, this)
@@ -52,7 +53,7 @@ class SelectImageRvAdapter: RecyclerView.Adapter<SelectImageRvAdapter.ImageHolde
         lateinit var imDeleteImage : ImageButton
 
 
-        fun setData(item : String){
+        fun setData(bitMap : Bitmap){
             tvTitle = itemView.findViewById(R.id.tvTitle)
             image = itemView.findViewById(R.id.imageView)
             imEditImage = itemView.findViewById(R.id.imEditImage)
@@ -71,12 +72,12 @@ class SelectImageRvAdapter: RecyclerView.Adapter<SelectImageRvAdapter.ImageHolde
 
 
             tvTitle.text = context.resources.getStringArray(R.array.title_array)[adapterPosition]
-            image.setImageURI(Uri.parse(item ))
+            image.setImageBitmap(bitMap)
 
         }
     }
 
-    fun updateAdapter(newList : List<String>, needClear : Boolean) {//Update function for Image
+    fun updateAdapter(newList : List<Bitmap>, needClear : Boolean) {//Update function for Image
         if (needClear) mainArray.clear()
         mainArray.addAll(newList)
         notifyDataSetChanged()

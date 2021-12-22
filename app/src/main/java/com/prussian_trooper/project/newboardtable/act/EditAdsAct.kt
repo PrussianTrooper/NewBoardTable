@@ -2,6 +2,7 @@ package com.prussian_trooper.project.newboardtable.act
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -119,18 +120,20 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
 
         } else {
 
-            openChooseImageFrag(imageAdapter.mainArray)
+            openChooseImageFrag(null)
+            chooseImageFrag?.updateAdapterFromEdir(imageAdapter.mainArray)
 
         }
     }
 
-    override fun onFragClose(list : ArrayList<String>) {
+    override fun onFragClose(list : ArrayList<Bitmap>) {
         rootElement.scrolViewMain.visibility = View.VISIBLE
         imageAdapter.update(list)
         chooseImageFrag = null
     }
 
-    private fun openChooseImageFrag(newList: ArrayList<String>) {
+    private fun openChooseImageFrag(newList: ArrayList<String>?) {
+
         chooseImageFrag = ImageListFrag(this, newList)
         rootElement.scrolViewMain.visibility = View.GONE
         val fm = supportFragmentManager.beginTransaction()

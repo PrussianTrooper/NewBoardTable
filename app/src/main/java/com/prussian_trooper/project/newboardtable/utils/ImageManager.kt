@@ -1,19 +1,18 @@
 package com.prussian_trooper.project.newboardtable.utils
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
 import androidx.exifinterface.media.ExifInterface
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
-
 import java.io.File
 
 object ImageManager {
 
-    const val MAX_IMAGE_SIZE = 800 // максимальный размер картинки
-    const val WIDTH = 0
-    const val HEIGHT = 1
+    private const val MAX_IMAGE_SIZE = 800 // максимальный размер картинки
+    private const val WIDTH = 0
+    private const val HEIGHT = 1
 
     fun getImageSize(uri: String): List<Int> {
 
@@ -49,8 +48,9 @@ object ImageManager {
     // сжатие картинки с сохранением пропорции
     //suspend - функция не перйдёт дальше пока не завершит свою работу
     //withContext(Dispatchers.IO) - функция будет работать в фоновом режиме
-   suspend fun imageResize(uris: List<String>): String = withContext(Dispatchers.IO){
+   suspend fun imageResize(uris: List<String>): List<Bitmap> = withContext(Dispatchers.IO){
         val tempList = ArrayList<List<Int>>()
+        val bitmapList = ArrayList<Bitmap>()
         for (n in uris.indices) {
 
             val size = getImageSize(uris[n])
@@ -82,8 +82,15 @@ object ImageManager {
                 }
 
             }
-        //Симуляция трудоёмкой операции. Затоморженное действие.
-        Thread.sleep(10000)
-        return@withContext "Done"
+
+        for (i in uris.indices){
+
+     kotlin.runCatching {
+           bitmapList.add(Picasso.get().load(File(uris[i])).resize(tempList[i][WIDTH], tempList[i][HEIGHT]).get())
+       }
+     }
+
+
+        return@withContext bitmapList
         }
 }
