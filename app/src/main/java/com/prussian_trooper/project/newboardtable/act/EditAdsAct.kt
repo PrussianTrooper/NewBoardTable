@@ -15,6 +15,7 @@ import com.prussian_trooper.project.newboardtable.dialogs.DialogSpinnerHelper
 import com.prussian_trooper.project.newboardtable.frag.FragmentCloseInterface
 import com.prussian_trooper.project.newboardtable.frag.ImageListFrag
 import com.prussian_trooper.project.newboardtable.utils.CityHelper
+import com.prussian_trooper.project.newboardtable.utils.ImageManager
 import com.prussian_trooper.project.newboardtable.utils.ImagePicker
 
 class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
@@ -47,7 +48,9 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
 
                 } else if (returnValues.size == 1 && chooseImageFrag == null) { //Проверка отвечающая за выбор картинки
 
-                    imageAdapter.update(returnValues)
+                    //imageAdapter.update(returnValues)
+                    val tempList = ImageManager.getImageSize(returnValues[0]) //Функция для одной картинки
+
 
                 } else if (chooseImageFrag != null) {
 
