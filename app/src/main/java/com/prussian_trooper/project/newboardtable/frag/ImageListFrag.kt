@@ -32,11 +32,7 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
         touchHelper.attachToRecyclerView(rootElement.rcViewSelectImage)
         rootElement.rcViewSelectImage.layoutManager = LinearLayoutManager(activity)
         rootElement.rcViewSelectImage.adapter = adapter
-        val updateList = ArrayList<SelectImageItem>()
-        for (n in 0 until newList.size){
-            updateList.add(SelectImageItem(n.toString(), newList[n]))
-        }
-        adapter.updateAdapter(updateList, true)
+        adapter.updateAdapter(newList, true)
 
 
     }
@@ -47,6 +43,7 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
     }
 
    private fun setUpToolbar() {
+
        rootElement.tb.inflateMenu(R.menu.menu_choose_image)
        val deleteItem = rootElement.tb.menu.findItem(R.id.id_delete_image)
        val addImageItem = rootElement.tb.menu.findItem(R.id.id_add_image)
@@ -68,10 +65,6 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
    }
 
     fun updateAdapter(newList: ArrayList<String>) {
-        val updateList = ArrayList<SelectImageItem>()
-        for (n in adapter.mainArray.size until newList.size + adapter.mainArray.size){
-            updateList.add(SelectImageItem(n.toString(), newList[n - adapter.mainArray.size]))
-        }
-        adapter.updateAdapter(updateList, false)
+        adapter.updateAdapter(newList, false)
     }
 }
