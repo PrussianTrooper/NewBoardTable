@@ -45,9 +45,14 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
 
                     openChooseImageFrag(returnValues)
 
+                } else if (returnValues.size == 1 && chooseImageFrag == null) { //Проверка отвечающая за выбор картинки
+
+                    imageAdapter.update(returnValues)
+
                 } else if (chooseImageFrag != null) {
 
                     chooseImageFrag?.updateAdapter(returnValues)
+
                 }
             }
         } else if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_SINGLE_IMAGE){
