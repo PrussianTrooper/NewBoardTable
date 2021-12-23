@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.prussian_trooper.project.newboardtable.R
@@ -54,11 +55,14 @@ class SelectImageRvAdapter: RecyclerView.Adapter<SelectImageRvAdapter.ImageHolde
 
 
         fun setData(bitMap : Bitmap){
+
             tvTitle = itemView.findViewById(R.id.tvTitle)
             image = itemView.findViewById(R.id.imageView)
             imEditImage = itemView.findViewById(R.id.imEditImage)
             imDeleteImage = itemView.findViewById(R.id.imDelete)
+
             imEditImage.setOnClickListener{
+
                 ImagePicker.getImages(context as EditAdsAct, 1, ImagePicker.REQUEST_CODE_GET_SINGLE_IMAGE)
                 context.editImagePos = adapterPosition
             }
