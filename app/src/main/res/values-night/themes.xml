@@ -23,4 +23,9 @@
         <item name="windowNoTitle">true</item>  <!-- Так же обязательно убираем название Title -->
         <item name="android:windowFullscreen">true</item> <!-- Убираем панель над toolbar -->
     </style>
+
+    <style name="ActionBarCustom">
+        <item name="android:textColorSecondary">@color/green_main</item>
+    </style>
+
 </resources>
