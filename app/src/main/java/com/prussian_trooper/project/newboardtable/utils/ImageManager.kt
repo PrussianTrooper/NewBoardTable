@@ -2,6 +2,7 @@ package com.prussian_trooper.project.newboardtable.utils
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +44,14 @@ object ImageManager {
             }
 
         return rotation
+    }
+
+    fun chooseScaleType(im: ImageView, bitmap: Bitmap){
+        if (bitmap.width > bitmap.height){
+            im.scaleType = ImageView.ScaleType.CENTER_CROP
+        } else {
+            im.scaleType = ImageView.ScaleType.CENTER_INSIDE
+        }
     }
 
     // сжатие картинки с сохранением пропорции
