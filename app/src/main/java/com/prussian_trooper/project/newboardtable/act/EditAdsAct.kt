@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.fxn.pix.Pix
 import com.fxn.utility.PermUtil
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
@@ -16,7 +15,6 @@ import com.prussian_trooper.project.newboardtable.dialogs.DialogSpinnerHelper
 import com.prussian_trooper.project.newboardtable.frag.FragmentCloseInterface
 import com.prussian_trooper.project.newboardtable.frag.ImageListFrag
 import com.prussian_trooper.project.newboardtable.utils.CityHelper
-import com.prussian_trooper.project.newboardtable.utils.ImageManager
 import com.prussian_trooper.project.newboardtable.utils.ImagePicker
 
 class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {

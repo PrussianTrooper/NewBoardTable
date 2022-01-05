@@ -5,18 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.google.android.gms.common.internal.SignInButtonImpl
-        android:id="@+id/btSignUpIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
-        android:text="@string/sign_up_action"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edSignEmail"
-        app:layout_constraintStart_toStartOf="@+id/edSignEmail"
-        app:layout_constraintTop_toBottomOf="@+id/btGoogleSignIn" />
-
     <Button
         android:id="@+id/btnForgetP"
         android:layout_width="0dp"
@@ -24,8 +12,7 @@
         android:text="@string/forget_password"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/edSignEmail"
-        app:layout_constraintStart_toStartOf="@+id/edSignEmail"
-        app:layout_constraintTop_toBottomOf="@+id/btSignUpIn" />
+        app:layout_constraintStart_toStartOf="@+id/edSignEmail" />
 
     <EditText
         android:id="@+id/edSignEmail"
@@ -96,8 +83,21 @@
         android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:text="Button"
         app:buttonSize="wide"
+        app:layout_constraintBottom_toTopOf="@+id/btSignUpIn"
         app:layout_constraintEnd_toEndOf="@+id/btSignUpIn"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/btSignUpIn"
-        app:layout_constraintTop_toBottomOf="@+id/edSignPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/edSignPassword"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btSignUpIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edSignEmail"
+        app:layout_constraintStart_toStartOf="@+id/edSignEmail"
+        app:layout_constraintTop_toBottomOf="@+id/edSignEmail"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
