@@ -4,9 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.act.EditAdsAct
@@ -61,7 +58,6 @@ class SelectImageRvAdapter(val adapterCallback: AdapterCallback): RecyclerView.A
                 adapter.notifyItemRemoved(adapterPosition)
                 for (n in 0 until adapter.mainArray.size) adapter.notifyItemChanged(n)
                 adapter.adapterCallback.onItemDelete()
-
             }
 
             viewBinding.tvTitle.text = context.resources.getStringArray(R.array.title_array)[adapterPosition]

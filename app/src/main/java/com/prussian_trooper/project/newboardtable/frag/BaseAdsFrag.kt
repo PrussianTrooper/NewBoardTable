@@ -48,7 +48,6 @@ open class BaseAdsFrag: Fragment(), InterAdsClose {
         MobileAds.initialize(activity as Activity)
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
-
     }
 
     private fun loadInterAd() {
@@ -59,9 +58,7 @@ open class BaseAdsFrag: Fragment(), InterAdsClose {
             override fun onAdLoaded(ad: InterstitialAd) {
 
                 interAd = ad
-
             }
-
         })
     }
 
@@ -74,24 +71,19 @@ open class BaseAdsFrag: Fragment(), InterAdsClose {
                 override fun onAdDismissedFullScreenContent() {
 
                     onClose()
-
                 }
 
                 override fun onAdFailedToShowFullScreenContent(p0: AdError) {
 
                     onClose()
-
                 }
-
             }
 
             interAd?.show(activity as Activity)
 
-
         } else {
 
             onClose()
-
         }
     }
 

@@ -3,7 +3,6 @@ package com.prussian_trooper.project.newboardtable.dialogHelper
 import android.app.Activity
 import android.app.AlertDialog
 import com.prussian_trooper.project.newboardtable.databinding.ProgressDialogLayoutBinding
-import com.prussian_trooper.project.newboardtable.databinding.SignDialogBinding
 
 object ProgressDialog {
 
@@ -18,5 +17,4 @@ object ProgressDialog {
         dialog.show()
         return dialog
     }
-
 }

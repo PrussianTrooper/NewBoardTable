@@ -47,7 +47,6 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
             rcViewSelectImage.layoutManager = LinearLayoutManager(activity)
             rcViewSelectImage.adapter = adapter
             if (newList != null) resizeSelectedImages(newList, true)
-
         }
     }
 
@@ -79,7 +78,6 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
             val bitmapList = ImageManager.imageResize(newList)
             adapter.updateAdapter(bitmapList, needClear)
             if(adapter.mainArray.size > 2) addImageItem?.isVisible = false
-
         }
     }
 
@@ -93,7 +91,6 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
             tb.setNavigationOnClickListener {
 
                 showInterAd()
-
             }
 
             deleteItem.setOnMenuItemClickListener {
@@ -125,7 +122,5 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
             adapter.mainArray[pos] = bitmapList[0]
             adapter.notifyItemChanged(pos)
         }
-
     }
-
 }

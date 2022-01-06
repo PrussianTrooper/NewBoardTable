@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     dialogHelper.accHelper.signInFirebaseWithGoogle(account.idToken!!)
                 }
 
-            }catch (e:ApiException){
+            } catch (e:ApiException){
                 Log.d("MyLog", "Api error: ${e.message}")
             }
         }
@@ -124,5 +124,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       } else {
           user.email
       }
-  }
+   }
 }

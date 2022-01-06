@@ -15,7 +15,6 @@ class ItemTouchMoveCallback(val adapter : ItemTouchAdapter) : ItemTouchHelper.Ca
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
@@ -32,6 +31,5 @@ class ItemTouchMoveCallback(val adapter : ItemTouchAdapter) : ItemTouchHelper.Ca
     interface ItemTouchAdapter{
         fun onMove(starPos : Int, targetPos : Int)
         fun onClear()
-
     }
 }

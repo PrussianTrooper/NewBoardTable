@@ -26,7 +26,6 @@ object ImagePicker {
             .setPath("/pix/images")
 
         Pix.start(context, options);
-
     }
 
     fun showSelectedImages(resultCode: Int, requestCode: Int, data : Intent?, edAct : EditAdsAct){
@@ -54,7 +53,6 @@ object ImagePicker {
                         edAct.rootElement.pBarLoad.visibility = View.GONE
                         edAct.imageAdapter.update(bitMapArray)
                     }
-
                 }
             }
         } else if (resultCode == AppCompatActivity.RESULT_OK && requestCode == REQUEST_CODE_GET_SINGLE_IMAGE){
@@ -65,7 +63,5 @@ object ImagePicker {
                 edAct.chooseImageFrag?.setSingleImage(uris?.get(0)!!, edAct.editImagePos)
             }
         }
-
     }
-
 }
