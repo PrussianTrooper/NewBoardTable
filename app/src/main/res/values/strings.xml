@@ -43,6 +43,10 @@
     <string name="tel">Телефон</string>
     <string name="tel_number">Номер телефона</string>
     <string name="no_country_selected">*Сначала выберите страну</string>
-
-
+    <string name="category">Категория</string>
+    <string name="select_category">*Выберите категорию</string>
+    <string name="price">Цена</string>
+    <string name="price_hint">*Цена</string>
+    <string name="description">Описание</string>
+    <string name="description_hint">*Описание</string>
  </resources>
