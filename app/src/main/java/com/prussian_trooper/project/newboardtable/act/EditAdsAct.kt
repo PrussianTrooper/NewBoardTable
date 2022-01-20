@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.fxn.utility.PermUtil
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
+import com.prussian_trooper.project.newboardtable.database.DbManager
 import com.prussian_trooper.project.newboardtable.databinding.ActivityEditAdsBinding
 import com.prussian_trooper.project.newboardtable.dialogs.DialogSpinnerHelper
 import com.prussian_trooper.project.newboardtable.frag.FragmentCloseInterface
@@ -81,6 +82,12 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
         }
    }
 
+    fun onClickSelectCat(view:View) {
+
+            val listCity = resources.getStringArray(R.array.category).toMutableList() as ArrayList
+            dialog.showSpinnerDialog(this, listCity, rootElement.tvCat)
+    }
+
     fun onClickGetImages(view:View){
         if (imageAdapter.mainArray.size == 0) {
 
@@ -92,6 +99,12 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
             chooseImageFrag?.updateAdapterFromEdir(imageAdapter.mainArray)
 
         }
+    }
+
+    fun onClickPublish(view: View){
+        val dbManager = DbManager()
+        dbManager.publishAd()
+
     }
 
     override fun onFragClose(list : ArrayList<Bitmap>) {

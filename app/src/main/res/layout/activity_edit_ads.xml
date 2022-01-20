@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/placeHolder"
@@ -53,7 +53,7 @@
                         app:layout_constraintTop_toTopOf="@+id/vpImages"
                         app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/ic_edit"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        tools:ignore="SpeakableTextPresentCheck,VectorDrawableCompat" />
 
                     <ProgressBar
                         android:id="@+id/pBarLoad"
@@ -169,7 +169,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName"
+                        android:id="@+id/editTel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -200,7 +200,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName2"
+                        android:id="@+id/edIndex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -213,6 +213,33 @@
 
                     <LinearLayout
                         android:id="@+id/dvider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/green_main"
+                        android:orientation="horizontal"></LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTitleIndex2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/send"
+                        android:textColor="@color/green_main"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxWithSend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/with_send" />
+
+                    <LinearLayout
+                        android:id="@+id/dvider5"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="5dp"
@@ -238,29 +265,29 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvTitleCountry"
+                        android:id="@+id/tvTitleCat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="@string/country"
+                        android:text="@string/category"
                         android:textColor="@color/green_main"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvCountry"
+                        android:id="@+id/tvCat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
-                        android:onClick="onClickSelectCountry"
+                        android:onClick="onClickSelectCat"
                         android:padding="10dp"
-                        android:text="@string/select_country"
+                        android:text="@string/select_category"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
-                        android:id="@+id/dvider1"
+                        android:id="@+id/dvider01"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginEnd="10dp"
@@ -269,60 +296,29 @@
                         android:orientation="horizontal"></LinearLayout>
 
                     <TextView
-                        android:id="@+id/tvTitleCity"
+                        android:id="@+id/tvTitlePrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="@string/city"
-                        android:textColor="@color/green_main"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvCity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="48dp"
-                        android:onClick="onClickSelectCity"
-                        android:padding="10dp"
-                        android:text="@string/select_city"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:id="@+id/dvider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
-                        android:background="@color/green_main"
-                        android:orientation="horizontal"></LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvTitleTel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/tel"
+                        android:text="@string/price"
                         android:textColor="@color/green_main"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName"
+                        android:id="@+id/edPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:ems="10"
-                        android:hint="@string/tel_number"
+                        android:hint="@string/price_hint"
                         android:inputType="number"
                         android:minHeight="48dp"
                         android:padding="10dp"
                         android:textColorHint="@color/grey_dark" />
 
                     <LinearLayout
-                        android:id="@+id/dvider3"
+                        android:id="@+id/dvider03"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginEnd="10dp"
@@ -331,29 +327,28 @@
                         android:orientation="horizontal"></LinearLayout>
 
                     <TextView
-                        android:id="@+id/tvTitleIndex"
+                        android:id="@+id/tvTitleDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="@string/index"
+                        android:text="@string/description"
                         android:textColor="@color/green_main"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName2"
+                        android:id="@+id/edDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:ems="10"
-                        android:hint="@string/index"
-                        android:inputType="number"
+                        android:hint="@string/description_hint"
                         android:minHeight="48dp"
                         android:padding="10dp"
                         android:textColorHint="@color/grey_dark" />
 
                     <LinearLayout
-                        android:id="@+id/dvider4"
+                        android:id="@+id/dvider04"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="5dp"
@@ -364,6 +359,15 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btPublish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/publish"
+                android:textColor="@color/green_main"
+                app:backgroundTint="@color/white" />
 
         </LinearLayout>
     </ScrollView>

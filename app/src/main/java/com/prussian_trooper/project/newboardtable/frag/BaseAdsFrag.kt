@@ -28,6 +28,8 @@ open class BaseAdsFrag: Fragment(), InterAdsClose {
         loadInterAd()
     }
 
+
+
     override fun onResume() {
         super.onResume()
         adView.resume()
