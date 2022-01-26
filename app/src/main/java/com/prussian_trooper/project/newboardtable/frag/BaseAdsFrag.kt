@@ -2,17 +2,12 @@ package com.prussian_trooper.project.newboardtable.frag
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.prussian_trooper.project.newboardtable.R
-import com.prussian_trooper.project.newboardtable.databinding.ActivityEditAdsBinding
-import com.prussian_trooper.project.newboardtable.databinding.ListImageFragBinding
-import java.util.*
 
 open class BaseAdsFrag: Fragment(), InterAdsClose {
     lateinit var adView: AdView
@@ -27,8 +22,6 @@ open class BaseAdsFrag: Fragment(), InterAdsClose {
         super.onCreate(savedInstanceState)
         loadInterAd()
     }
-
-
 
     override fun onResume() {
         super.onResume()
@@ -46,7 +39,6 @@ open class BaseAdsFrag: Fragment(), InterAdsClose {
     }
 
     private fun initAds(){
-
         MobileAds.initialize(activity as Activity)
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
@@ -67,28 +59,21 @@ open class BaseAdsFrag: Fragment(), InterAdsClose {
     fun showInterAd(){
 
         if (interAd != null){
-
             interAd?.fullScreenContentCallback = object : FullScreenContentCallback(){
-
                 override fun onAdDismissedFullScreenContent() {
-
                     onClose()
                 }
 
                 override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-
                     onClose()
                 }
             }
 
             interAd?.show(activity as Activity)
-
         } else {
-
             onClose()
         }
     }
 
     override fun onClose() {}
-
 }

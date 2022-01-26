@@ -39,6 +39,5 @@ class DialogSpinnerHelper {
                 return true
             }
         })
-
     }
 }

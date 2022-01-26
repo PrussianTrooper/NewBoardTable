@@ -1,13 +1,33 @@
 package com.prussian_trooper.project.newboardtable.database
 
+import android.util.Log
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.prussian_trooper.project.newboardtable.data.Ad
 
 class DbManager {
-    val db = Firebase.database.reference
+    val db = Firebase.database.getReference("main")
+    val auth = Firebase.auth
 
-    fun publishAd(){
+    fun publishAd(ad: Ad){
+        //функция для записи в базу данных
+        if (auth.uid != null)db.child(ad.key ?: "empty").child(auth.uid!!).child("ad").setValue(ad)
+    }
 
-        db.setValue("Привет")//функция для записи в базу данны
+    fun readDataFromDb() {
+        db.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (item in snapshot.children) {
+                    val ad = item.children.iterator().next().child("ad").getValue(Ad::class.java)
+                    Log.d("MyLog", "Data: ${ad?.country}")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 }

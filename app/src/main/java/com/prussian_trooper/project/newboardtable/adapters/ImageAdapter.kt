@@ -12,7 +12,6 @@ import com.prussian_trooper.project.newboardtable.R
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageHolder>() {
     val mainArray = ArrayList<Bitmap>()
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.image_adapter_item, parent, false)
         return ImageHolder(view)

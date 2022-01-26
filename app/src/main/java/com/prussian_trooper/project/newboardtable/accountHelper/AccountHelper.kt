@@ -66,9 +66,8 @@ class AccountHelper(act:MainActivity) {
                 } else {
                     Log.d("MyLog", "Google Sign In Exception : ${task.exception}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        //Log.d("MyLog", "Google Sign In Exception : ${task.exception}")
+
                         val exception = task.exception as FirebaseAuthInvalidCredentialsException
-                        //Log.d("MyLog", "Exception 2 : ${exception.errorCode}")
 
                         if (exception.errorCode == FirebaseAuthConstants.ERROR_INVALID_EMAIL) {
                             Toast.makeText(act, FirebaseAuthConstants.ERROR_INVALID_EMAIL, Toast.LENGTH_LONG).show()
@@ -80,7 +79,6 @@ class AccountHelper(act:MainActivity) {
                         if (exception.errorCode == FirebaseAuthConstants.ERROR_USER_NOT_FOUND) {
                             Toast.makeText(act, FirebaseAuthConstants.ERROR_USER_NOT_FOUND, Toast.LENGTH_LONG).show()
                         }
-                        //Log.d("MyLog", "Google Sign In Exception : ${exception.errorCode}")
                     }
                 }
             }
@@ -95,7 +93,7 @@ class AccountHelper(act:MainActivity) {
                     Toast.makeText(act, act.resources.getString(R.string.link_done), Toast.LENGTH_LONG).show()
                 }
             }
-        }else {
+        } else {
             Toast.makeText(act, act.resources.getString(R.string.enter_to_G), Toast.LENGTH_LONG).show()
         }
     }
@@ -126,7 +124,6 @@ class AccountHelper(act:MainActivity) {
                 Log.d("MyLog", "Google Sign In Exception : ${task.exception}")
             }
         }
-
     }
 
     private fun sendEmailVerification(user: FirebaseUser) {

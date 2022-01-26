@@ -19,21 +19,21 @@ class DialogHelper(act: MainActivity) {
          builder.setView(view)
          setDialogState(index, rootDialogElement)
 
-        val dialog = builder.create()
+         val dialog = builder.create()
 
          rootDialogElement.btSignUpIn.setOnClickListener{
              setOnClickSignUpIn(index, rootDialogElement, dialog)
          }
-        rootDialogElement.btnForgetP.setOnClickListener{
+         rootDialogElement.btnForgetP.setOnClickListener{
             setOnClickResetPassword(rootDialogElement, dialog)
-        }
-        rootDialogElement.btGoogleSignIn.setOnClickListener{
+         }
+         rootDialogElement.btGoogleSignIn.setOnClickListener{
             accHelper.signInWithGoogle()
             dialog.dismiss()
-        }
+         }
 
          dialog.show()
-     }
+    }
 
     private fun setOnClickResetPassword(rootDialogElement: SignDialogBinding, dialog: AlertDialog?) {
         if (rootDialogElement.edSignEmail.text.isNotEmpty()){
@@ -41,7 +41,6 @@ class DialogHelper(act: MainActivity) {
                 if (task.isSuccessful) {
                     Toast.makeText(act, R.string.email_reset_password_was_send, Toast.LENGTH_LONG).show()
                 }
-
             }
             dialog?.dismiss()
         } else {

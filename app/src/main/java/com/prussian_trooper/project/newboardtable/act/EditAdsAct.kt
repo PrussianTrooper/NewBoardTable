@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.fxn.utility.PermUtil
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
+import com.prussian_trooper.project.newboardtable.data.Ad
 import com.prussian_trooper.project.newboardtable.database.DbManager
 import com.prussian_trooper.project.newboardtable.databinding.ActivityEditAdsBinding
 import com.prussian_trooper.project.newboardtable.dialogs.DialogSpinnerHelper
@@ -23,6 +24,7 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
     lateinit var rootElement:ActivityEditAdsBinding
     private val dialog = DialogSpinnerHelper()
     lateinit var imageAdapter : ImageAdapter
+    private val dbManager = DbManager()
     var editImagePos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +32,6 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
         rootElement = ActivityEditAdsBinding.inflate(layoutInflater)
         setContentView(rootElement.root)
         init()
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -77,7 +78,7 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
         if (selectedCountry != getString(R.string.select_country)){
         val listCity = CityHelper.getAllCities(selectedCountry, this)
         dialog.showSpinnerDialog(this, listCity, rootElement.tvCity)
-    }else {
+    } else {
         Toast.makeText(this, "No country selected", Toast.LENGTH_LONG).show()
         }
    }
@@ -97,14 +98,26 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
 
             openChooseImageFrag(null)
             chooseImageFrag?.updateAdapterFromEdir(imageAdapter.mainArray)
-
         }
     }
 
     fun onClickPublish(view: View){
-        val dbManager = DbManager()
-        dbManager.publishAd()
+        dbManager.publishAd(fillAd())
+    }
 
+    private fun fillAd(): Ad {
+        val ad: Ad
+        rootElement.apply {
+            ad = Ad(tvCountry.text.toString(),
+                    tvCity.text.toString(),
+                    editTel.text.toString(),
+                    edIndex.text.toString(),
+                    checkBoxWithSend.isChecked.toString(),
+                    tvCat.text.toString(),
+                    edPrice.text.toString(),
+                    edDescription.text.toString(), dbManager.db.push().key)
+        }
+        return ad
     }
 
     override fun onFragClose(list : ArrayList<Bitmap>) {
