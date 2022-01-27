@@ -6,6 +6,7 @@ data class Ad(
     val tel: String? = null,
     val withSent: String? = null,
     val category: String? = null,
+    val title: String? = null,
     val price: String? = null,
     val description: String? = null,
     val key: String? = null,

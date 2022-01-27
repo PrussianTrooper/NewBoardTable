@@ -24,7 +24,7 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
     lateinit var rootElement:ActivityEditAdsBinding
     private val dialog = DialogSpinnerHelper()
     lateinit var imageAdapter : ImageAdapter
-    private val dbManager = DbManager()
+    private val dbManager = DbManager(null)
     var editImagePos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,6 +114,7 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
                     edIndex.text.toString(),
                     checkBoxWithSend.isChecked.toString(),
                     tvCat.text.toString(),
+                    edTitle.text.toString(),
                     edPrice.text.toString(),
                     edDescription.text.toString(), dbManager.db.push().key)
         }
