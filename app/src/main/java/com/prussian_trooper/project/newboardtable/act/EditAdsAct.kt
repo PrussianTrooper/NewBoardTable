@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import com.fxn.utility.PermUtil
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
@@ -26,6 +27,8 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
     lateinit var imageAdapter : ImageAdapter
     private val dbManager = DbManager(null)
     var editImagePos = 0
+    var launcherMultiSelectImage: ActivityResultLauncher<Intent>? = null
+    var launcherSingleSelectImage: ActivityResultLauncher<Intent>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,34 +37,31 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
         init()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        ImagePicker.showSelectedImages(resultCode, requestCode, data, this)
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         when (requestCode) {
             PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS -> {
 
-
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ImagePicker.getImages(this,3, ImagePicker.REQUEST_CODE_GET_IMAGES)
+                   /* ImagePicker.launcher(this, launcherMultiSelectImage)*/
                 } else {
                     Toast.makeText(this, "Approve permissions to open Pix ImagePicker", Toast.LENGTH_LONG).show()
                 }
                 return
             }
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     private fun init() {
         imageAdapter = ImageAdapter()
         rootElement.vpImages.adapter = imageAdapter
+        launcherMultiSelectImage = ImagePicker.getLauncherForMultiSelectImages(this)
+        launcherSingleSelectImage = ImagePicker.getLauncherForSingleImage(this)
     }
 
     //OnClicks
@@ -92,7 +92,7 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
     fun onClickGetImages(view:View){
         if (imageAdapter.mainArray.size == 0) {
 
-        ImagePicker.getImages(this,3, ImagePicker.REQUEST_CODE_GET_IMAGES)
+        ImagePicker.launcher(this,launcherMultiSelectImage, 3)
 
         } else {
 

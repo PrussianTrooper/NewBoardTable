@@ -8,11 +8,11 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prussian_trooper.project.newboardtable.R
+import com.prussian_trooper.project.newboardtable.act.EditAdsAct
 import com.prussian_trooper.project.newboardtable.databinding.ListImageFragBinding
 import com.prussian_trooper.project.newboardtable.dialogHelper.ProgressDialog
 import com.prussian_trooper.project.newboardtable.utils.AdapterCallback
@@ -101,11 +101,7 @@ class ImageListFrag(private val fragCloseInterface : FragmentCloseInterface, pri
 
             addImageItem?.setOnMenuItemClickListener {
                 val imageCont = ImagePicker.MAX_IMAGE_COUNT - adapter.mainArray.size
-                ImagePicker.getImages(
-                    activity as AppCompatActivity,
-                    imageCont,
-                    ImagePicker.REQUEST_CODE_GET_IMAGES
-                )
+                ImagePicker.launcher(activity as EditAdsAct, (activity as EditAdsAct).launcherMultiSelectImage, imageCont)
                 true
             }
         }
