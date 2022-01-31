@@ -116,7 +116,7 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
                     tvCat.text.toString(),
                     edTitle.text.toString(),
                     edPrice.text.toString(),
-                    edDescription.text.toString(), dbManager.db.push().key)
+                    edDescription.text.toString(), dbManager.db.push().key, dbManager.auth.uid)
         }
         return ad
     }
