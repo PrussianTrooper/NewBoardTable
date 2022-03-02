@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "731656421516",
+    "firebase_url": "https://newboardtable-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "newboardtable",
     "storage_bucket": "newboardtable.appspot.com"
   },

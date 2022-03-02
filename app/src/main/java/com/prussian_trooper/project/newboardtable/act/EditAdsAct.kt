@@ -11,8 +11,8 @@ import androidx.activity.result.ActivityResultLauncher
 import com.fxn.utility.PermUtil
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
-import com.prussian_trooper.project.newboardtable.data.Ad
-import com.prussian_trooper.project.newboardtable.database.DbManager
+import com.prussian_trooper.project.newboardtable.model.Ad
+import com.prussian_trooper.project.newboardtable.model.DbManager
 import com.prussian_trooper.project.newboardtable.databinding.ActivityEditAdsBinding
 import com.prussian_trooper.project.newboardtable.dialogs.DialogSpinnerHelper
 import com.prussian_trooper.project.newboardtable.frag.FragmentCloseInterface
@@ -116,7 +116,8 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
                     tvCat.text.toString(),
                     edTitle.text.toString(),
                     edPrice.text.toString(),
-                    edDescription.text.toString(), dbManager.db.push().key, dbManager.auth.uid)
+                    edDescription.text.toString(), dbManager.db.push().key,
+                    dbManager.auth.uid)
         }
         return ad
     }

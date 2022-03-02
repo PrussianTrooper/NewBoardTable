@@ -37,7 +37,6 @@ object ImageManager {
             exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
         rotation =
             if (orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270) {
-
                 90
             } else {
                 0
@@ -54,7 +53,7 @@ object ImageManager {
         }
     }
 
-    // сжатие картинки с сохранением пропорции
+    //сжатие картинки с сохранением пропорции
     //suspend - функция не перйдёт дальше пока не завершит свою работу
     //withContext(Dispatchers.IO) - функция будет работать в фоновом режиме
    suspend fun imageResize(uris: List<String>): List<Bitmap> = withContext(Dispatchers.IO){

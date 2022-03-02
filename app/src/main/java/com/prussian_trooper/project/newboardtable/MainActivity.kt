@@ -8,34 +8,34 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.prussian_trooper.project.newboardtable.act.EditAdsAct
 import com.prussian_trooper.project.newboardtable.adapters.AdsRcAdapter
-import com.prussian_trooper.project.newboardtable.data.Ad
-import com.prussian_trooper.project.newboardtable.database.DbManager
-import com.prussian_trooper.project.newboardtable.database.ReadDataCallback
 import com.prussian_trooper.project.newboardtable.databinding.ActivityMainBinding
 import com.prussian_trooper.project.newboardtable.dialogHelper.DialogConst
 import com.prussian_trooper.project.newboardtable.dialogHelper.DialogHelper
 import com.prussian_trooper.project.newboardtable.dialogHelper.GoogleAccConst
+import com.prussian_trooper.project.newboardtable.viewmodel.FirebaseViewModel
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ReadDataCallback {
-
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var tvAccount: TextView
     private lateinit var rootElement: ActivityMainBinding
     private val dialogHelper = DialogHelper(this)
     val mAuth = Firebase.auth
-    val dbManager = DbManager(this)
+    //lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
     val adapter = AdsRcAdapter(mAuth)
+    private val firebaseViewModel: FirebaseViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(view)
         init()
         initRecyclerView()
-        dbManager.readDataFromDb()
+        initViewModel()
+        firebaseViewModel.loadAllAds()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {//While button is active, new activity start working
@@ -82,6 +83,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun initViewModel() {
+        firebaseViewModel.liveAdsData.observe(this,{
+            adapter.updateAdapter(it)
+        })
     }
 
     private fun init() {
@@ -144,7 +151,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       }
    }
 
-    override fun readData(list: List<Ad>) {
-        adapter.updateAdapter(list)
-    }
 }

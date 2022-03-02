@@ -5,8 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
-import com.prussian_trooper.project.newboardtable.data.Ad
+import com.prussian_trooper.project.newboardtable.model.Ad
 import com.prussian_trooper.project.newboardtable.databinding.AdListItemBinding
 import java.util.ArrayList
 
