@@ -157,26 +157,11 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
                     tvCat.text.toString(),
                     edTitle.text.toString(),
                     edPrice.text.toString(),
-                    edDescription.text.toString(), dbManager.db.push().key, dbManager.auth.uid)
+                    edDescription.text.toString(), dbManager.db.push().key,"0", dbManager.auth.uid)
         }
         return ad
     }
 
-    private fun Ad(
-        country: String,
-        city: String,
-        tel: String,
-        index: String,
-        withSent: String,
-        category: String,
-        title: String,
-        price: String,
-        description: String,
-        key: String?,
-        uid: String?
-    ): Ad {
-        TODO("Not yet implemented")
-    }
 
     override fun onFragClose(list : ArrayList<Bitmap>) {
         rootElement.scrolViewMain.visibility = View.VISIBLE

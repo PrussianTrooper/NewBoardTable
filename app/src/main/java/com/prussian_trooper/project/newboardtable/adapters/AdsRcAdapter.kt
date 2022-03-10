@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.prussian_trooper.project.newboardtable.MainActivity
+import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.act.EditAdsAct
 import com.prussian_trooper.project.newboardtable.model.Ad
 import com.prussian_trooper.project.newboardtable.databinding.AdListItemBinding
@@ -42,8 +43,22 @@ class AdsRcAdapter(val act: MainActivity): RecyclerView.Adapter<AdsRcAdapter.AdH
         fun setData(ad: Ad) = with(binding) {//описание объявления
             tvTitile.text = ad.title
             tvDescription.text = ad.description
+            tvViewCounter.text = ad.viewsCounter
+            tvFavCounter.text = ad.favCounter
+            if (ad.isFav) {
+                ibFav.setImageResource(R.drawable.ic_fav_pressed)
+            }else{
+                ibFav.setImageResource(R.drawable.ic_fav_normal)
+
+            }
             tvPrice.text = ad.price
             showEditPanel(isOwner(ad))
+            ibFav.setOnClickListener{
+                act.onFavClicked(ad)
+            }
+            itemView.setOnClickListener {
+                act.onAdViewed(ad)
+            }
             ibEditAd.setOnClickListener(onClickEdit(ad))
             ibDeleteAd.setOnClickListener {
                 act.onDeleteItem(ad)//удаление объявления
@@ -75,8 +90,10 @@ class AdsRcAdapter(val act: MainActivity): RecyclerView.Adapter<AdsRcAdapter.AdH
 
     }
 
-    interface DeleteItemListener {
+    interface Listener {
         fun onDeleteItem(ad: Ad)
+        fun onAdViewed(ad: Ad)
+        fun onFavClicked(ad: Ad)
     }
 
 }

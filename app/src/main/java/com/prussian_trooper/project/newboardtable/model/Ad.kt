@@ -13,6 +13,14 @@ data class Ad(
     val price: String? = null,
     val description: String? = null,
     val key: String? = null,
+    var favCounter: String = "0",
     val uid: String? = null,
-    val uid1: String?
+
+    var isFav: Boolean = false,
+    val uid1: String? = null,
+
+    var viewsCounter: String = "0",
+    var emailCounter: String = "0",
+    var callsCounter: String = "0"
+
 ):Serializable

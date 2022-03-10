@@ -10,20 +10,62 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class DbManager(nothing: Nothing?) {
-    val db = Firebase.database.getReference("main")
+    val db = Firebase.database.getReference(MAIN_NODE)
     val auth = Firebase.auth
 
     fun publishAd(ad: Ad, finishedListener: FinishWorkListener){
         //функция для записи в базу данных
         if (auth.uid != null)db.child(ad.key ?: "empty")
-            .child(auth.uid!!).child("ad")
+            .child(auth.uid!!).child(AD_NODE)
             .setValue(ad).addOnCompleteListener{
                // if(it.isSuccessful)
                 finishedListener.onFinish()
             }
     }
 
+    fun adViewed(ad: Ad) {
+        var counter = ad.viewsCounter.toInt()
+        counter++
+        if (auth.uid != null)db.child(ad.key ?: "empty")
+            .child(INFO_NODE).setValue(InfoItem(counter.toString(), ad.emailCounter, ad.callsCounter))
+    }
+
+    fun onFavClick(ad: Ad, listener: FinishWorkListener){
+        if (ad.isFav) {
+            removeFromFavs(ad, listener)
+        } else {
+            addToFavs(ad, listener)
+        }
+    }
+
+   private fun addToFavs(ad:Ad, listener: FinishWorkListener) {
+        ad.key?.let {
+            auth.uid?.let { uid -> db.child(it).child(FAVS_NODE)
+                .child(uid).setValue(uid)
+                .addOnCompleteListener{
+                    if (it.isSuccessful) listener.onFinish()
+                }
+            }
+        }
+    }
+
+    private fun removeFromFavs(ad:Ad, listener: FinishWorkListener) {
+        ad.key?.let {
+            auth.uid?.let { uid -> db.child(it).child(FAVS_NODE)
+                .child(uid).removeValue()
+                .addOnCompleteListener{
+                    if (it.isSuccessful) listener.onFinish()
+                }
+            }
+        }
+    }
+
     fun getMyAds(readDataCallback: ReadDataCallback?){
+        val query = db.orderByChild(auth.uid + "/ad/uid").equalTo(auth.uid)
+        readDataFromDb(query, readDataCallback)
+    }
+
+    fun getMyFavs(readDataCallback: ReadDataCallback?){
         val query = db.orderByChild(auth.uid + "/ad/uid").equalTo(auth.uid)
         readDataFromDb(query, readDataCallback)
     }
@@ -46,8 +88,21 @@ class DbManager(nothing: Nothing?) {
                 val adArray = ArrayList<Ad>()
                 for (item in snapshot.children) {
 
-                    val ad = item.children.iterator().next().child("ad").getValue(Ad::class.java)
-                    if (ad != null) adArray.add(ad)
+                    var ad: Ad? = null
+                    item.children.forEach{
+                        if(ad == null) ad = it.child(AD_NODE).getValue(Ad::class.java)
+                    }
+                    val infoItem = item.child(INFO_NODE).getValue(InfoItem::class.java)
+
+                    val favCounter = item.child(FAVS_NODE).childrenCount
+                    val isFav = auth.uid?.let { item.child(FAVS_NODE).child(it).getValue(String::class.java) }
+                    ad?.isFav = isFav != null
+                    ad?.favCounter = favCounter.toString()
+
+                    ad?.viewsCounter = infoItem?.viewsCounter ?: "0"
+                    ad?.emailCounter = infoItem?.emailsCounter ?: "0"
+                    ad?.callsCounter = infoItem?.callsCounter ?: "0"
+                    if (ad != null) adArray.add(ad!!)
                 }
                 readDataCallback?.readData(adArray)
             }
@@ -61,5 +116,12 @@ class DbManager(nothing: Nothing?) {
     }
     interface FinishWorkListener{
         fun onFinish()
+    }
+
+    companion object {
+        const val AD_NODE = "ad"
+        const val INFO_NODE = "info"
+        const val MAIN_NODE = "main"
+        const val FAVS_NODE = "favs"
     }
 }

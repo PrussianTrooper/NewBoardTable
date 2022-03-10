@@ -4,11 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -28,7 +27,7 @@ import com.prussian_trooper.project.newboardtable.dialogHelper.GoogleAccConst
 import com.prussian_trooper.project.newboardtable.model.Ad
 import com.prussian_trooper.project.newboardtable.viewmodel.FirebaseViewModel
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AdsRcAdapter.DeleteItemListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AdsRcAdapter.Listener {
     private lateinit var tvAccount: TextView
     private lateinit var rootElement: ActivityMainBinding
     private val dialogHelper = DialogHelper(this)
@@ -81,6 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun initViewModel() {
         firebaseViewModel.liveAdsData.observe(this,{
             adapter.updateAdapter(it)
+            rootElement.mainContent.tvEmpty.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         })
     }
 
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     mainContent.toolbar.title = getString(R.string.ad_my_ads)
                 }
                 R.id.id_favs -> {
-                    Toast.makeText(this@MainActivity, "Favs", Toast.LENGTH_LONG).show()
+                    firebaseViewModel.loadMyFavs()
                 }
                 R.id.id_home -> {
                     firebaseViewModel.loadAllAds()
@@ -173,5 +173,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onDeleteItem(ad: Ad) {
         firebaseViewModel.deleteItem(ad)
+    }
+
+    override fun onAdViewed(ad: Ad) {
+        firebaseViewModel.adViewed(ad)
+    }
+
+    override fun onFavClicked(ad: Ad) {
+        firebaseViewModel.onFavClick(ad)
     }
 }
