@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/drawable/edit_image_bg.xml" value="0.5" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/drawable/edit_image_bg_normal.xml" value="0.67" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/drawable/edit_image_bg_pressed.xml" value="0.21822916666666667" />
@@ -22,7 +23,7 @@
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/ad_list_item.xml" value="0.25" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/image_adapter_item.xml" value="0.1490036231884058" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/list_image_frag.xml" value="0.25" />
-        <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/main_content.xml" value="0.2" />
+        <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/main_content.xml" value="0.25" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/nav_header_main.xml" value="0.21" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/nav_header_menu.xml" value="0.1272644927536232" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/progress_dialog_layout.xml" value="0.25" />
@@ -30,6 +31,7 @@
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/sign_dialog.xml" value="0.33" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/sp_list_item.xml" value="0.16576086956521738" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/layout/spinner_layout.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/bottom_main_menu.xml" value="0.1" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/draver_main_menu.xml" value="0.33" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/drawer_main_menu.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/User/NewBoardTable/app/src/main/res/menu/main_menu.xml" value="0.20208333333333334" />

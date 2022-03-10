@@ -1,5 +1,6 @@
 package com.prussian_trooper.project.newboardtable.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,14 +35,18 @@ class AdsRcAdapter(val auth: FirebaseAuth): RecyclerView.Adapter<AdsRcAdapter.Ad
 
     class AdHolder(val binding: AdListItemBinding, val auth: FirebaseAuth) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(ad: Ad){//описание объявления
-            binding.apply {
-                tvTitile.text = ad.title
-                tvDescription.text = ad.description
-                tvPrice.text = ad.price
-
-            }
+        fun setData(ad: Ad) = with(binding) {//описание объявления
+            tvTitile.text = ad.title
+            tvDescription.text = ad.description
+            tvPrice.text = ad.price
             showEditPanel(isOwner(ad))
+            ibEditAd.setOnClickListener(onClickEdit(ad))
+        }
+
+        private fun onClickEdit(ad: Ad): View.OnClickListener{
+            return View.OnClickListener {
+                val editIntetnt = Intent()
+            }
         }
 
         private fun isOwner(ad: Ad): Boolean{

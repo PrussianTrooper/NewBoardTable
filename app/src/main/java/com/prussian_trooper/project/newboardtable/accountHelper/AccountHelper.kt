@@ -100,7 +100,7 @@ class AccountHelper(act:MainActivity) {
 
     private fun getSignInClient():GoogleSignInClient {//Призапуске функции, возвращается клиент
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(act.getString(R.string.default_web_client_id)).requestEmail().build()
+            .requestIdToken(act.getString(R.string.cameraview_default_autofocus_marker)).requestEmail().build()//.string.default_web_client_id or cameraview_default_autofocus_marker
         return GoogleSignIn.getClient(act,gso)
     }
 
