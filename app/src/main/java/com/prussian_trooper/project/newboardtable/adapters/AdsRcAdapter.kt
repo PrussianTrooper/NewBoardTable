@@ -4,18 +4,21 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.prussian_trooper.project.newboardtable.MainActivity
+import com.prussian_trooper.project.newboardtable.act.EditAdsAct
 import com.prussian_trooper.project.newboardtable.model.Ad
 import com.prussian_trooper.project.newboardtable.databinding.AdListItemBinding
 import java.util.ArrayList
 
-class AdsRcAdapter(val auth: FirebaseAuth): RecyclerView.Adapter<AdsRcAdapter.AdHolder>() {
+class AdsRcAdapter(val act: MainActivity): RecyclerView.Adapter<AdsRcAdapter.AdHolder>() {
     val adArray = ArrayList<Ad>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdHolder {//момент создания шаблона в ad_list_item.xml
       val binding = AdListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return AdHolder(binding, auth)
+        return AdHolder(binding, act)
     }
 
     override fun onBindViewHolder(holder: AdHolder, position: Int) {//заполнение
@@ -27,13 +30,14 @@ class AdsRcAdapter(val auth: FirebaseAuth): RecyclerView.Adapter<AdsRcAdapter.Ad
     }
 
     fun updateAdapter(newList: List<Ad>){
+        val diffResult = DiffUtil.calculateDiff(DiffUtilHelper(adArray, newList))
+        diffResult.dispatchUpdatesTo(this)
         adArray.clear()
         adArray.addAll(newList)
-        notifyDataSetChanged()
     }
 
 
-    class AdHolder(val binding: AdListItemBinding, val auth: FirebaseAuth) : RecyclerView.ViewHolder(binding.root) {
+    class AdHolder(val binding: AdListItemBinding, val act: MainActivity) : RecyclerView.ViewHolder(binding.root) {
 
         fun setData(ad: Ad) = with(binding) {//описание объявления
             tvTitile.text = ad.title
@@ -41,16 +45,23 @@ class AdsRcAdapter(val auth: FirebaseAuth): RecyclerView.Adapter<AdsRcAdapter.Ad
             tvPrice.text = ad.price
             showEditPanel(isOwner(ad))
             ibEditAd.setOnClickListener(onClickEdit(ad))
+            ibDeleteAd.setOnClickListener {
+                act.onDeleteItem(ad)//удаление объявления
+            }
         }
 
-        private fun onClickEdit(ad: Ad): View.OnClickListener{
+        private fun onClickEdit(ad: Ad): View.OnClickListener{//редактирование объявления
             return View.OnClickListener {
-                val editIntetnt = Intent()
+                val editIntent = Intent(act, EditAdsAct::class.java).apply {
+                    putExtra(MainActivity.EDIT_STATE, true)
+                    putExtra(MainActivity.ADS_DATA, ad)
+                }
+                act.startActivity(editIntent)
             }
         }
 
         private fun isOwner(ad: Ad): Boolean{
-            return ad.uid == auth.uid
+            return ad.uid == act.mAuth.uid
         }
 
         private fun showEditPanel(isOwner: Boolean){
@@ -63,4 +74,9 @@ class AdsRcAdapter(val auth: FirebaseAuth): RecyclerView.Adapter<AdsRcAdapter.Ad
         }
 
     }
+
+    interface DeleteItemListener {
+        fun onDeleteItem(ad: Ad)
+    }
+
 }

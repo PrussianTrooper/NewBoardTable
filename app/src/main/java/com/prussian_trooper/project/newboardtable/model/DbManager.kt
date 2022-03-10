@@ -1,5 +1,6 @@
 package com.prussian_trooper.project.newboardtable.model
 
+import android.view.PixelCopy
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -12,9 +13,14 @@ class DbManager(nothing: Nothing?) {
     val db = Firebase.database.getReference("main")
     val auth = Firebase.auth
 
-    fun publishAd(ad: Ad){
+    fun publishAd(ad: Ad, finishedListener: FinishWorkListener){
         //функция для записи в базу данных
-        if (auth.uid != null)db.child(ad.key ?: "empty").child(auth.uid!!).child("ad").setValue(ad)
+        if (auth.uid != null)db.child(ad.key ?: "empty")
+            .child(auth.uid!!).child("ad")
+            .setValue(ad).addOnCompleteListener{
+               // if(it.isSuccessful)
+                finishedListener.onFinish()
+            }
     }
 
     fun getMyAds(readDataCallback: ReadDataCallback?){
@@ -25,6 +31,13 @@ class DbManager(nothing: Nothing?) {
     fun getAllAds(readDataCallback: ReadDataCallback?){
         val query = db.orderByChild(auth.uid + "/ad/uid")
         readDataFromDb(query, readDataCallback)
+    }
+
+    fun deleteAd(ad: Ad, listener: FinishWorkListener) {
+        if(ad.key == null || ad.uid == null) return
+        db.child(ad.key).child(ad.uid).removeValue().addOnCompleteListener {
+            if (it.isSuccessful) listener.onFinish()
+        }
     }
 
    private fun readDataFromDb(query: Query, readDataCallback: ReadDataCallback?) {
@@ -45,5 +58,8 @@ class DbManager(nothing: Nothing?) {
 
     interface ReadDataCallback {
         fun readData(list: ArrayList<Ad>)
+    }
+    interface FinishWorkListener{
+        fun onFinish()
     }
 }

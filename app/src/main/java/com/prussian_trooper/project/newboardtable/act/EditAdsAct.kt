@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import com.fxn.utility.PermUtil
+import com.prussian_trooper.project.newboardtable.MainActivity
 import com.prussian_trooper.project.newboardtable.R
 import com.prussian_trooper.project.newboardtable.adapters.ImageAdapter
 import com.prussian_trooper.project.newboardtable.model.Ad
@@ -27,6 +28,8 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
     lateinit var imageAdapter : ImageAdapter
     private val dbManager = DbManager(null)
     var editImagePos = 0
+    private var isEditState = false
+    private var ad: Ad? = null
 
     var launcherMultiSelectImage: ActivityResultLauncher<Intent>? = null
     var launcherSingleSelectImage: ActivityResultLauncher<Intent>? = null
@@ -36,6 +39,32 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
         rootElement = ActivityEditAdsBinding.inflate(layoutInflater)
         setContentView(rootElement.root)
         init()
+        checkEditState()
+    }
+
+    private fun checkEditState(){
+        isEditState = isEditState()
+        if(isEditState()) {
+            ad = intent.getSerializableExtra(MainActivity.ADS_DATA) as Ad
+            if( ad != null) fillViews(ad!!)
+        }
+    }
+
+    private fun isEditState(): Boolean {
+        return intent.getBooleanExtra(MainActivity.EDIT_STATE, false)
+
+    }
+
+    private fun fillViews(ad: Ad) = with(rootElement){
+        tvCountry.text = ad.country
+        tvCity.text = ad.city
+        editTel.setText(ad.tel)
+        edIndex.setText(ad.index)
+        checkBoxWithSend.isChecked = ad.withSent.toBoolean()
+        tvCat.text = ad.category
+        edTitle.setText(ad.title)
+        edPrice.setText(ad.price)
+        edDescription.setText(ad.description)
     }
 
     override fun onRequestPermissionsResult(
@@ -85,7 +114,6 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
    }
 
     fun onClickSelectCat(view:View) {
-
             val listCity = resources.getStringArray(R.array.category).toMutableList() as ArrayList
             dialog.showSpinnerDialog(this, listCity, rootElement.tvCat)
     }
@@ -103,7 +131,19 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
     }
 
     fun onClickPublish(view: View){
-        dbManager.publishAd(fillAd())
+        val adTemp = fillAd()
+        if(isEditState){
+            dbManager.publishAd(adTemp.copy(key = ad?.key), onPublishFinish())
+        } else {
+            dbManager.publishAd(adTemp, onPublishFinish())
+        }
+    }
+
+    private fun onPublishFinish(): DbManager.FinishWorkListener {
+        return object: DbManager.FinishWorkListener {
+            override fun onFinish() {
+            }
+        }
     }
 
     private fun fillAd(): Ad {
@@ -117,10 +157,25 @@ class EditAdsAct : AppCompatActivity(), FragmentCloseInterface {
                     tvCat.text.toString(),
                     edTitle.text.toString(),
                     edPrice.text.toString(),
-                    edDescription.text.toString(), dbManager.db.push().key,
-                    dbManager.auth.uid)
+                    edDescription.text.toString(), dbManager.db.push().key, dbManager.auth.uid)
         }
         return ad
+    }
+
+    private fun Ad(
+        country: String,
+        city: String,
+        tel: String,
+        index: String,
+        withSent: String,
+        category: String,
+        title: String,
+        price: String,
+        description: String,
+        key: String?,
+        uid: String?
+    ): Ad {
+        TODO("Not yet implemented")
     }
 
     override fun onFragClose(list : ArrayList<Bitmap>) {

@@ -25,14 +25,15 @@ import com.prussian_trooper.project.newboardtable.databinding.ActivityMainBindin
 import com.prussian_trooper.project.newboardtable.dialogHelper.DialogConst
 import com.prussian_trooper.project.newboardtable.dialogHelper.DialogHelper
 import com.prussian_trooper.project.newboardtable.dialogHelper.GoogleAccConst
+import com.prussian_trooper.project.newboardtable.model.Ad
 import com.prussian_trooper.project.newboardtable.viewmodel.FirebaseViewModel
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AdsRcAdapter.DeleteItemListener {
     private lateinit var tvAccount: TextView
     private lateinit var rootElement: ActivityMainBinding
     private val dialogHelper = DialogHelper(this)
     val mAuth = Firebase.auth
-    val adapter = AdsRcAdapter(mAuth)
+    val adapter = AdsRcAdapter(this)
     private val firebaseViewModel: FirebaseViewModel by viewModels()
 
 
@@ -165,5 +166,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
           user.email
       }
    }
+    companion object{
+        const val EDIT_STATE = "edit_state"
+        const val ADS_DATA = "ads_data"
+    }
 
+    override fun onDeleteItem(ad: Ad) {
+        firebaseViewModel.deleteItem(ad)
+    }
 }
